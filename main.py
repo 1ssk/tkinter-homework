@@ -1,38 +1,51 @@
 # 
-# Образец 05.09
+# Образец 05.09 main.py
 #
 # Обзор https://metanit.com/python/tkinter/2.2.php
 #
 # -------------------------
 
 from tkinter import *
-from switch_window import SwitchWindow
+from switch import SwitchWindow
 
 
-r = Tk()
-r.title("Мастер пол")
-r.iconbitmap(default="favicon.ico")
-r.geometry("600x400")
+auth = Tk()
+auth.title("Мастер пол")
+auth.iconbitmap(default="favicon.ico")
+auth.geometry("600x500")
+auth.configure(bg="#FFF8DC")
 
 python_logo = PhotoImage(file="./images.png")
 
 def auth_b():
     if login.get() == "1" and password.get() == "1":
         print("Логин:", login.get(), "Пароль:", password.get())
-        SwitchWindow(r)
+        SwitchWindow(auth)
     else:
         print("неправильно")
 
-Label(image=python_logo, compound="top").pack()
+# Указываем фон для всех виджетов
+Label(auth, image=python_logo, compound="top", bg="#FFF8DC").pack(pady=20)
 
-Label(text="Логин").pack()
-login = Entry()
-login.pack()
+# Фрейм для логина с выравниванием меток слева
+login_frame = Frame(auth, bg="#FFF8DC")
+login_frame.pack(pady=10)
 
-l = Label(text="Пароль").pack()
-password = Entry(show="*")
-password.pack()
+Label(login_frame, text="Логин:", width=8, anchor="e", bg="#FFF8DC").pack(side=LEFT, padx=5)
+login = Entry(login_frame, width=20)
+login.pack(side=LEFT, padx=5)
 
-Button(text="Войти", command=auth_b).pack()
+# Фрейм для пароля с выравниванием меток слева
+password_frame = Frame(auth, bg="#FFF8DC")
+password_frame.pack(pady=10)
 
-r.mainloop()
+Label(password_frame, text="Пароль:", width=8, anchor="e", bg="#FFF8DC").pack(side=LEFT, padx=5)
+password = Entry(password_frame, show="*", width=20)
+password.pack(side=LEFT, padx=5)
+
+Button(auth, text="Войти", command=auth_b, 
+       bg="#4CAF50", fg="white", font=("Arial", 10, "bold"),
+       width=10, padx=3, pady=3).pack(pady=15)
+
+
+auth.mainloop()
