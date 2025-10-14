@@ -48,4 +48,7 @@ Button(auth, text="Войти", command=auth_b,
        width=10, padx=3, pady=3).pack(pady=15)
 
 
-auth.mainloop()
+try:
+    auth.mainloop()
+except KeyboardInterrupt:
+    print("Программа завершена пользователем.")
